@@ -21,14 +21,13 @@ def roast_category(roast_value):
 
 def train_models():
     url = (
-        "https://raw.githubusercontent.com/MuseumofModernData/"
-        "coffee-quality-database/main/coffee_ratings.csv"
+        "https://raw.githubusercontent.com/leontoddjohnson/datasets/refs/heads/main/data/coffee_analysis.csv"
     )
     df = pd.read_csv(url)
     y = df["rating"].values
 
     # Linear Regression
-    X1 = df[["100g_USD"]].values
+    X1 = df[["100g_USD"]]
     lr = LinearRegression()
     lr.fit(X1, y)
     with open("model_1.pickle", "wb") as f:
@@ -37,7 +36,7 @@ def train_models():
 
     #  Decision Tree Regressor
     df["roast_cat"] = df["roast"].map(roast_category)
-    X2 = df[["100g_USD", "roast_cat"]].values
+    X2 = df[["100g_USD", "roast_cat"]]
     dtr = DecisionTreeRegressor(random_state=42)
     dtr.fit(X2, y)
     with open("model_2.pickle", "wb") as f:
