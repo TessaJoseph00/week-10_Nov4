@@ -36,7 +36,7 @@ def roast_category(roast_value):
 
 def predict_rating(df_X, text=False):
     """Predict coffee rating using the appropriate model."""
-    # Ensure models are loaded
+    
     if text:
         if tfidf is None or model3 is None:
             raise ValueError("TF-IDF model not trained yet.")
@@ -69,7 +69,7 @@ def predict_rating(df_X, text=False):
 
 
 if __name__ == "__main__":
-    print("=== Numeric + Roast Example ===")
+    print("Numeric + Roast Example")
     df = pd.DataFrame(
         [
             [10.0, "Dark"],
@@ -83,7 +83,7 @@ if __name__ == "__main__":
     except ValueError as e:
         print(e)
 
-    print("\n=== Text Example ===")
+    print("\nText Example")
     df_text = pd.DataFrame(
         [
             ["A delightful coffee with hints of chocolate and caramel."],

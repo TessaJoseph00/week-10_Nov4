@@ -28,8 +28,10 @@ def train_models():
 
     # Linear Regression
     X1 = df[["100g_USD"]]
+
     lr = LinearRegression()
     lr.fit(X1, y)
+
     with open("model_1.pickle", "wb") as f:
         pickle.dump(lr, f)
     print(" model_1.pickle saved.")
@@ -37,8 +39,10 @@ def train_models():
     #  Decision Tree Regressor
     df["roast_cat"] = df["roast"].map(roast_category)
     X2 = df[["100g_USD", "roast_cat"]]
+
     dtr = DecisionTreeRegressor(random_state=42)
     dtr.fit(X2, y)
+
     with open("model_2.pickle", "wb") as f:
         pickle.dump(dtr, f)
     print(" model_2.pickle saved.")
@@ -47,8 +51,10 @@ def train_models():
     df["desc_3"] = df["desc_3"].fillna("")
     tfidf = TfidfVectorizer(max_features=500)
     X_text = tfidf.fit_transform(df["desc_3"])
+    
     lr_text = LinearRegression()
     lr_text.fit(X_text, y)
+
     with open("model_3.pickle", "wb") as f:
         pickle.dump((tfidf, lr_text), f)
     print(" model_3.pickle saved.")
